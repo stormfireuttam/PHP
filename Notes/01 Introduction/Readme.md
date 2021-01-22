@@ -68,3 +68,91 @@ The output to the above code would be
 ```
 Array([0] => 23 [1] => 43 [2] => 23 [3] => 51 [4] => hi [5] => HELLO)
 ```
+
+
+In php we are also provided with the facility of using key value pairs but with a different name to it. In php we use **associative arrays**, below is a typical example of associative arrays.
+```
+$names = array('first name' => 'David', 'second name' => 'Hilton');
+echo print_r($names);
+echo $names['first name'];
+```
+
+# C) Control Structures
+
+### 1) if statement
+
+The below code is self explanatory and will clear the concept of if statements in php.
+```
+<?php
+  $a = 10;
+  $b = 20;
+  if($a > $b) {
+    echo "a is greater than b";
+  }
+  else if($a < $b) {
+    echo "a is less than b";
+  }
+  else {
+    echo "a is equal to b";
+  }
+?>
+```
+
+### 2) Comparison operators
+
+- equal ==
+- identical ===
+- compare ( > ), ( < ), ( >= ), ( <= ) 
+- not equal !=
+- not identical !==
+
+### 3) Logical Operators
+
+- AND &&
+- OR ||
+- NOT !
+
+### 4) Switch statements 
+
+```
+<?php
+  $num = 10;
+  switch($num) {
+    case 1: 
+      echo "This is 1";
+      break;
+    case 10: 
+      echo "This is 10";
+      break;
+    case 100: 
+      echo "This is 100";
+      break;
+    default:
+      echo "Default case";
+  }
+?>
+```
+
+### 5) Loops
+
+#### a) While loop
+```
+$a = 1;
+while($a < 5) {
+  echo $a;
+  $a++;
+}
+```
+#### b) For loop
+```
+for($a = 1; $a < 10; $a++) {
+  echo $a . "<br>";
+}
+```
+#### c) Foreach loop
+```
+$numbers = array(234, 23, 342, 5466, 657, 82342);
+foreach($numbers as $number) {
+  echo $number . "<br>";
+}
+```

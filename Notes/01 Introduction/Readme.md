@@ -156,3 +156,99 @@ foreach($numbers as $number) {
   echo $number . "<br>";
 }
 ```
+
+# D) Functions, Global Variables and Constants
+
+
+### 1) Functions
+
+#### Defining Functions
+
+```
+function basic() {
+  calculate();
+  echo "<br>";
+  saySomething();
+}
+
+function calculate() { 
+  echo 10 + 20;
+}
+
+function saySomething() {
+  echo "I am not in the mood to say anything at all";
+}
+
+basic();
+```
+
+#### Function Parameters
+
+```
+function calculate($a, $b) {
+  $sum = $a + $b;
+  echo $sum;
+}
+
+calculate(10, 20);
+```
+
+#### Return Values from Functions
+
+```
+function add($a, $b) {
+  $sum = $a + $b;
+  return $sum;
+}
+
+$result = add(10, 20);
+```
+
+### 2) Global Variables and Scope
+
+If we want to change the value of a global variable inside a function we can do something like
+
+```
+$x = "outside";   //global 
+function fun() {
+  global $x;
+  $x = "inside";
+}
+
+echo $x;  //Outputs outside
+fun();
+echo $x;  //Outputs inside
+```
+
+### 3) Constants
+
+For defining a constant we use something like
+```
+define(NAME, "David");
+```
+If we try to change the value of NAME it will create an error.
+
+When using the const keyword, only scalar data (boolean, integer, float and string) can be contained in constants prior to PHP 5.6. From PHP 5.6 onwards, it is possible to define a constant as a scalar expression, and it is also possible to define an array constant. It is possible to define constants as a resource, but it should be avoided, as it can cause unexpected results.
+```
+const CONSTANT = 'Hello World';
+```
+It is possible to assign an array with this method like so.
+```
+const ANIMALS = array('dog', 'cat', 'bird');
+```
+Some examples from the docs below, so you can copy it and try it in your php file.
+```
+// Works as of PHP 5.3.0
+const CONSTANT = 'Hello World';
+echo CONSTANT;
+
+// Works as of PHP 5.6.0
+const ANOTHER_CONST = CONSTANT.'; Goodbye World';
+echo ANOTHER_CONST;
+const ANIMALS = array('dog', 'cat', 'bird');
+echo ANIMALS[1]; // outputs "cat"
+
+// Works as of PHP 7
+define('ANIMALS', array('dog', 'cat', 'bird'));
+echo ANIMALS[1]; // outputs "cat"
+```

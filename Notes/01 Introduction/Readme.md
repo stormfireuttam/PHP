@@ -39,7 +39,7 @@ Their are two types of comments available in Php
 
 ### 1)Variables
 
-In php we can assign integers, strings, images, html code and various different types in variables.
+In php we can assign integers, strings, images, html code and various different types in variables. But at a time we can assign only one value to a variable like every other language.
 ```
 <?php 
     $var1 = 100;
@@ -47,4 +47,24 @@ In php we can assign integers, strings, images, html code and various different 
     //We use . to concatenate a string with variables in php
     echo $var1 . " " . $var2;
 ?>
+```
+
+### 2)Arrays
+
+In php we are also provided with the arrays. So the various ways to define arrays in php are stated in the example given below. The arrays in php are zero based indexed. The arrays in php can have values of different data types at the same time as well.
+```
+$arr1 = array(23, 43, 23, 51, 'hi', '<h1>Hello</h1>');
+/* This is another way to declare arrays in php 
+  $arr2 = [];
+*/
+//This code would print 43
+echo $arr1[1];
+```
+Other than this their is a function in php to print the whole array along with their indexes.
+```
+print_r($arr1);
+```
+The output to the above code would be
+```
+Array([0] => 23 [1] => 43 [2] => 23 [3] => 51 [4] => hi [5] => HELLO)
 ```

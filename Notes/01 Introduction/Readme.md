@@ -179,9 +179,9 @@ foreach($numbers as $number) {
 ```
 
 # D) Functions, Global Variables and Constants
-
-
 ### 1) Functions
+
+<img src = "function.jpg"/>
 
 #### Defining Functions
 

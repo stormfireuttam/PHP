@@ -225,6 +225,10 @@ function add($a, $b) {
 $result = add(10, 20);
 ```
 
+#### Function with default values
+
+<img src="function01.jpg"/>
+
 ### 2) Global Variables and Scope
 
 If we want to change the value of a global variable inside a function we can do something like

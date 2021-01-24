@@ -48,6 +48,13 @@ In php we can assign integers, strings, images, html code and various different 
     echo $var1 . " " . $var2;
 ?>
 ```
+**Boolean variables**
+
+Boolean variables contain only TRUE or FALSE as values.
+```
+$var = TRUE;
+```
+This is boolean variable. TRUE or FALSE should not be in quotes. Then it will be considered as strings.
 
 ### 2)Arrays
 
@@ -98,21 +105,35 @@ The below code is self explanatory and will clear the concept of if statements i
 ?>
 ```
 
-### 2) Comparison operators
+### 2) Operators
 
+#### Comparison Operators
 - equal ==
 - identical ===
 - compare ( > ), ( < ), ( >= ), ( <= ) 
 - not equal !=
 - not identical !==
 
-### 3) Logical Operators
+#### Arithmetic Operations
+It usually includes addition, subtraction,multiplication, division, modulus which gives the remainder of the division and exponentiation.
+Example 
+- $a + $b Addition Sum of $a and $b
+- $a - $b Subtraction Difference of $a and $b
+- $a * $b Multiplication Product of $a and $b
+- $a / $b Division Quotient of $a and $b
+- $a % $b Modulo Remainder of $a divided by $b
+- $a ** $b Exponentiation Result of raising $a to the $b th power. 
 
-- AND &&
-- OR ||
-- NOT !
+#### Logical Operations(Introduced in PHP 5.6)
+Logical operators, Relational operators are used for comparisons. These are the valid operators for PHP. These operations either evaluate to TRUE or a FALSE state.
 
-### 4) Switch statements 
+Example
+- $a and $b And TRUE if both $a and $b are TRUE, FALSE otherwise
+- $a || $b Or TRUE if either $a or $b is TRUE. If $a is TRUE and $b is false then also this condition will output true as one of the two options or both the option should be true in OR case
+- $a xor $b Xor TRUE if either $a or $b is TRUE, but not both; otherwise FALSE
+- ! $a Not TRUE if $a is not TRUE, otherwise FALSE
+
+### 3) Switch statements 
 
 ```
 <?php

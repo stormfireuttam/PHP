@@ -83,6 +83,8 @@ $names = array('first name' => 'David', 'second name' => 'Hilton');
 echo print_r($names);
 echo $names['first name'];
 ```
+In php we are also provided with 2d arrays.
+<img src="2dArray.jpg"/>
 
 # C) Control Structures
 

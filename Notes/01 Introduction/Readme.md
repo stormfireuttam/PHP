@@ -1,5 +1,5 @@
 # A) The First Steps
-
+PHP(Hypertext Preprocessor) is a server side scripting language which is used to perform operations on database.
 ### 1) Embedding PHP
 
 For embedding Php in HTML we use the format 

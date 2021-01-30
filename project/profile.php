@@ -1,8 +1,14 @@
 <?php
     session_start();
     require 'config.php';
-    $query = "SELECT * from `users`";
+    if(!isset($_SESSION['username']) || $_SESSION['username'] == NULL)  
+    {     
+        header('location: index.php');
+    } 
+    $user = $_SESSION['username'];
+    $query = "SELECT * from `users` WHERE `username` LIKE '$user'";
     $result = mysqli_query($con, $query) or die(mysqli_error($con));
+    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,24 +24,38 @@
                  <h3>Welcome <?php echo $_SESSION['username'];?></h3><br>
               <div>
                   <?php 
-                    while($rows=mysqli_fetch_assoc($result)) {    
+                    $rows=mysqli_fetch_assoc($result);   
                   ?>
                         <p>Email id is : <?php echo $rows['email']; ?></p> 
                         <p>Mobile number is: <?php echo $rows['contact']; ?></p> 
-                  <?php
-                    }
-                  ?>
               </div>
+              <br>
              </div>
-              <div class="data">
-                  <img src="img/avatar.svg" class="avatar"/>    
+             <?php if (isset($_GET['error'])): ?>
+                <p><?php echo $_GET['error']; ?></p>
+            <?php endif ?>
+             <div class="img-container">
+             <?php
+                $img = $rows['image'];
+                $img_url = "avatar.svg";
+                if($img != NULL) {
+                    $img_url = $img;
+                }
+             ?>
+              <img src="uploads/<?=$img_url?>" alt="Avatar" class="image" style="width:80%"> 
+                <form class="middle" action="upload.php" method="post" enctype="multipart/form-data">
+                    <input type="file" name="my_image" id="fileToUpload" class="text">
+                    <input type="submit" name="submit" value="Upload" id="upload-img">
+                </form>
               </div>
-          </center>
+             </center>
+          <br>
           <form class="forms-container" action="index.php" method="post">
               <input type="submit" id="logout-btn" value="Log Out" name="logout-btn">
           </form>
           <?php
             if(isset($_POST['logout-btn'])){
+                    $_SESSION['username'] = NULL;
                     session_unset();
                     session_destroy();
                     header('location: index.php');

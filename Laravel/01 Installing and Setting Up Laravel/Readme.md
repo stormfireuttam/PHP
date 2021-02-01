@@ -21,7 +21,7 @@ composer create-project --prefer-dist laravel/laravel blog "5.4.*"
 php artisan serve
 ```
 2. Now you can access you project at [Localhost](localhost:8000/)
-3. The First page shown on using the mentioned link above is the controller situated in ***routes > web.php*** and its view file can be found at ***resources > views > welcome.blade.php**
+3. The First page shown on using the mentioned link above is the controller situated in ***routes > web.php*** and its view file can be found at ***resources > views > welcome.blade.php***
 4. Laravel makes use of a controller which redirects user to the view associated to it
 ```
 Route::get('/', function () {

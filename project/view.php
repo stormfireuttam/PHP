@@ -13,11 +13,16 @@ $result = mysqli_query($con, $query) or die(mysqli_error($con));
 <head>
     <meta charset="UTF-8">
     <title>View Data</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="style02.css" />
 </head>
 <body>
        <div class="container">
-           <table class="styled-table">
+           <table class="styled-table ">
                 <thead>
                     <tr>
                         <th>Username</th>
@@ -28,7 +33,6 @@ $result = mysqli_query($con, $query) or die(mysqli_error($con));
                 </thead>
                 <tbody>
                  <?php  
-    //                if($query->num_rows > 0){
                         while($row = mysqli_fetch_assoc($result)){
                             $username = $row['username'];
                             $email = $row['email'];

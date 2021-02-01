@@ -11,17 +11,43 @@ body {
     margin: 0;
 }
 
+thead{
+  color: #426696;
+  font-weight: 600;
+  font-size: 2rem;
+}
+
+tbody {
+  color: #658ec6;
+  font-weight: 500;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  min-height: 100vh;
+  background: linear-gradient(to right top, #65dfc9, #6cdbeb);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .container {
   position: relative;
   align-self: center
   width: 100%;
-  background-color: #fff;
-  min-height: 100vh;
+  background: linear-gradient(to right top, #65dfc9, #6cdbeb);  min-height: 100vh;
   overflow: hidden;
   margin: auto 50px;
 }
 
 .styled-table {
+    background: linear-gradient(
+    to right bottom,
+    rgba(255, 255, 255, 0.7),
+    rgba(255, 255, 255, 0.3)
+  );
+    backdrop-filter: blur(2rem);
+    z-index: 2;
     border-collapse: collapse;
     margin: 25px 0;
     font-size: 1.2rem;
@@ -59,5 +85,7 @@ body {
 }
 
 img {
-    width: 200px;
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
 }

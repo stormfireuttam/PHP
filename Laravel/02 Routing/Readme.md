@@ -19,6 +19,7 @@ Route::get('/test', function () {
    ]); 
 });
 ```
-Now inside views we can access the data using any one of the two given below:
-- ```<?= $name; ?>```
-- ```{{  $name  }}```
+Now inside views we can access the data using any one of the following given below:
+- ```<?= $name; ?>``` Basic Php
+- ```{{  $name  }}``` It treats everything inside as message
+- ```{!! $name !!}``` It can be used to embed html and js code

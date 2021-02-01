@@ -50,3 +50,37 @@ if(!array_key_exists($post, $posts)) {
         abort(404, 'Sorry that post was not found!');
     }
 ```
+
+## Controller
+
+We make use of controllers in Laravel as well. We can just simply mention the controllers in the Routes and the redirecting will be handled by them. Below is a typical example of the same.
+```
+Route::get('/posts/{post}', 'PostsController@show');
+```
+We can also use cmd to create a controller with the help of command
+```
+php artisan make:controller PostsController
+```
+Controllers are situated in ***app > Http > Controllers***. Below is the code for the controller
+```
+<?php
+
+namespace App\Http\Controllers;
+
+class PostsController {
+    public function show($post) {
+        $posts = [
+            "my-first-post" => 'Hello, this is my first blog post',
+            "my-second-post" => 'I am loving it'
+        ];
+
+        if(!array_key_exists($post, $posts)) {
+            abort(404, 'Sorry that post was not found!');
+        }
+
+        return view('post', [
+           'post' => $posts[$post] ?? 'Nothing here yet.' 
+        ]);
+    }
+}
+```

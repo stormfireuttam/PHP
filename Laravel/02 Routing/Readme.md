@@ -6,9 +6,16 @@ This is the code inside web.php which serves the purpose of sending the data to 
 ```
 Route::get('/test', function () {
    $name = request('name');
-//   return $name;
    return view('test', [
        'name' => $name
+   ]); 
+});
+```
+Or
+```
+Route::get('/test', function () {
+   return view('test', [
+       'name' => request('name')
    ]); 
 });
 ```

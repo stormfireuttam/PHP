@@ -149,3 +149,62 @@ We can use a single command to create a model, migration and controller at the s
 	php artisan make:model [name for your model] -mc
 ```
 Here the flag m denotes migration whereas flag c denotes controller.
+
+# Business Logic
+
+We can play around and make changes in the database using a utility provided by laravel which can be accessed by using the following command
+```
+	php artisan tinker
+```
+This command will open up a notepad kind of feature wherein you can perform basic operations or modify the values of your tables.
+
+For the example given below we already have an Assignment model, migration and controller
+```
+C:\Users\hp\blog>php artisan tinker
+Psy Shell v0.9.12 (PHP 7.0.33 ΓÇö cli) by Justin Hileman
+>>> $assignment = new App\Assignment; 				\\With the help of this statement we access the model for the assignment
+=> App\Assignment {#3028}
+>>> $assignment->body = 'Finish school work';			\\With the help of this statement we modify the body of the assignment
+=> "Finish school work"
+>>> $assignment->save();					\\We save the changes made to our assignment
+=> true
+>>> App\Assignment::all();					\\With the help of this command we access the data our table has
+=> Illuminate\Database\Eloquent\Collection {#3036
+     all: [
+       App\Assignment {#3037
+         id: 1,
+         body: "Finish school work",
+         completed: 0,
+         created_at: "2021-02-02 06:02:41",
+         updated_at: "2021-02-02 06:02:41",
+         due_date: null,
+       },
+     ],
+   }
+>>> App\Assignment::first();					\\With the help of this command we access the first entry of our database
+=> App\Assignment {#3039
+     id: 1,
+     body: "Finish school work",
+     completed: 0,
+     created_at: "2021-02-02 06:02:41",
+     updated_at: "2021-02-02 06:02:41",
+     due_date: null,
+   }
+>>> App\Assignment::where('completed', false)->get();		\\With the help of this command we can even use where clause
+=> Illuminate\Database\Eloquent\Collection {#3023
+     all: [
+       App\Assignment {#3036
+         id: 1,
+         body: "Finish school work",
+         completed: 0,
+         created_at: "2021-02-02 06:02:41",
+         updated_at: "2021-02-02 06:02:41",
+         due_date: null,
+       },
+     ],
+   }
+>>> App\Assignment::where('completed', true)->get();		\\Another possible example of where clause
+=> Illuminate\Database\Eloquent\Collection {#3031
+     all: [],
+   }
+```

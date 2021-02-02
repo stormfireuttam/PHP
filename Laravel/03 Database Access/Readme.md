@@ -208,3 +208,38 @@ Psy Shell v0.9.12 (PHP 7.0.33 ΓÇö cli) by Justin Hileman
      all: [],
    }
 ```
+We wanted to modify the completed attribute for the first entry so firstly we will create a method in our model class as follows:
+```
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Assignment extends Model
+{
+    public function complete() {
+    	$this->completed = true;
+    	$this->save();
+    }
+}
+```
+After making these changes again back to cmd
+```
+C:\Users\hp\blog>php artisan tinker
+Psy Shell v0.9.12 (PHP 7.0.33 ΓÇö cli) by Justin Hileman
+>>> $assignment->complete();
+PHP Notice:  Undefined variable: assignment in Psy Shell code on line 1
+>>> $assignment = App\Assignment::first();
+=> App\Assignment {#3037
+     id: 1,
+     body: "Finish school work",
+     completed: 0,
+     created_at: "2021-02-02 06:02:41",
+     updated_at: "2021-02-02 06:02:41",
+     due_date: null,
+   }
+>>> $assignment->complete();
+=> null
+```
+So now our table entry has been updated.

@@ -46,3 +46,97 @@ and this is how we access it in view
 ```
      	$post = Post::where('slug',$slug)->firstOrFail();
 ```
+
+# Migrations
+
+In Laravel we don't need to set up database by going into MYSQL and creating a new table instead Laravel provides us with facility of Migrations to help us out and set up our tables in the database.
+
+1. Firstly to create a migration we use the following command
+```
+php artisan make:migration create_posts_table
+```
+2. After the migration is created we set up the required columns for our table. Below is a typical example of a migration table and its columns
+```
+<?php
+
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreatePostsTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('posts', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('slug');
+            $table->text('body');
+            $table->timestamp('created_at');
+            $table->timestamp('published_at')->nullable();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('posts');
+    }
+}
+
+```
+In the above code we can see two functions up() and down(). The up() function is used to create the table and set up the various columns for the table whereas the down() function is used to drop the existing table or simply roll back the changes created by the up() function.
+
+3. Now after setting up the columns we can make it come to action and create tables for our database by using the command
+```
+	php artisan migrate
+```
+4. Other than creating tables we can also add up columns to our existing table using command in cmd
+```
+	php artisan make:migration add_title_to_posts_table
+```
+This command will add title column to the posts table and we set up the code for it in the following way
+```
+<?php
+
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class AddTitleToPostsTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::table('posts', function(Blueprint $table){
+            $table->string('title');
+        }); 
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::table('posts', function(Blueprint $table){
+            $table->dropColumn('title');
+        });
+    }
+}
+```
+After we are done you know the command very well just simply ***php artisan migrate*** and you are done.
+If you want to rollback the changes created during the last migrate simply use the command ***php artisan migrate:rollback***

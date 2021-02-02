@@ -261,7 +261,7 @@ class ArticlesController extends Controller
     }
 }
 ```
-So basically we access the article on the basis of the id passed and to create links to these articles we make changes in the about.blade.php file as well
+So basically we access the article on the basis of the id passed and to create links to these articles we make changes in the **about.blade.php** file as well
 ```
 <ul class="style1">
 	@foreach($articles as $article)
@@ -271,4 +271,38 @@ So basically we access the article on the basis of the id passed and to create l
 	</li>
 	@endforeach
 </ul>
+```
+In order to create an index page for the articles we can do the following changes:
+
+1. Make changes in web.php
+```
+Route::get('/articles', 'ArticlesController@index');
+```
+2. Create the index() function in the controller to show all the articles
+```
+public function index() {
+    	$articles = Article::latest()->get();
+    	return view('articles.index', ['articles' => $articles]);
+    }
+```
+3. Finally set up the view file
+```
+@extends ('layout')
+
+@section ('content')
+<div id="wrapper">
+    <div id="page" class="container">
+        <div id="content">
+            <ul class="style1">
+                @foreach($articles as $article)
+                <li class="first">
+                    <h3><a href="/articles/{{$article->id}}">{{ $article -> title}}</a></h3>
+                    <p>{{ $article -> excerpt}}</p>
+                </li>
+                @endforeach
+            </ul>
+        </div>
+    </div>
+</div>
+@endsection
 ```

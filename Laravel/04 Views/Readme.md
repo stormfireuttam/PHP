@@ -178,3 +178,33 @@ Released   : 20140225
 Here the code ***class="{{Request::path() === '/' ? 'current_page_item' : ''}}"*** which is used to set the class for active nav link based on the path. 
 
 Another alternative for implementing the same functionality is ***class="{{Request::is('about') ? 'current_page_item' : ''}}"*** 
+
+
+# Asset Compilation With Laravel Mix and Webpack
+
+Laravel comes with out of the box webpack functionality.
+```
+let mix = require('laravel-mix');
+
+/*
+ |--------------------------------------------------------------------------
+ | Mix Asset Management
+ |--------------------------------------------------------------------------
+ |
+ | Mix provides a clean, fluent API for defining some Webpack build steps
+ | for your Laravel application. By default, we are compiling the Sass
+ | file for the application as well as bundling up all the JS files.
+ |
+ */
+
+   mix.js('resources/assets/js/app.js', 'public/js');
+   mix.sass('resources/assets/sass/app.scss', 'public/css');
+
+```
+So basically what webpack does is compile the files to be precompiled before the starting of server and store them or make changes in the respective folders as mentioned in the above code.
+
+It may be the case that some of the functionalities have not been set up in your application so for those application you can simply install them using npm with the help of command
+```
+	npm install
+```
+After insatlling the dependencies you can compile your sass or js files usin the command ***npm run dev***. But if you want to make changes and check them along you can use the following command ***npm run watch***.

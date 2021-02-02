@@ -31,3 +31,18 @@ and this is how we access it in view
 </body>
 </html>
 ```
+
+# Eloquent Model
+
+1. To set up an Eloquent Model we can simply use the following cmd command
+```
+ php artisan make:model [name of your model]
+```
+2. We can use the model in our controller by simply importing it
+```
+	use App\[name of your model];
+```
+3. It saves the code for connecting to db as the code will get simplified to
+```
+     	$post = Post::where('slug',$slug)->firstOrFail();
+```

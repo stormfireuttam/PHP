@@ -93,4 +93,69 @@ class ProjectController extends Controller
 }
 ```
 
-# Restful Routing
+# Form Handling
+
+Created a form for creation of articles in the ***view > article > create.blade.php***
+```
+@extends ('layout')
+
+@section('head')
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+@endsection
+
+@section ('content')
+	<div id="wrapper">
+		<div id="page" class="container">
+			<h1 class="heading has-text-weight-bold is-size-4">New Article</h1>
+			
+			<form method="POST" action="/articles">
+				{{ csrf_field() }}			
+				<div class="field">
+					<label class="label" for="title">Title</label>
+					<div class="control">
+						<input class="input" type="text" name="title" id="title">
+					</div>
+				</div>
+				<div class="field">
+					<label class="label" for="excerpt">Excerpt</label>
+					<div class="control">
+						<textarea class="input" name="excerpt" id="excerpt"></textarea>
+					</div>
+				</div>
+				<div class="field">
+					<label class="label" for="body">Body</label>
+					<div class="control">
+						<textarea class="input" name="body" id="body"></textarea>
+					</div>
+				</div>
+				<div class="field is-grouped">
+					<div class="control">
+						<button class="button is-link" type="submit">Submit</button>
+					</div>
+				</div>
+			</form>
+		</div> 			
+	</div>
+@endsection
+```
+After this we set up the ArticlesController to handle the creation of article.
+```
+//Shows a view to create a new resource
+    public function create() {
+    	return view('articles.create');
+    }
+
+    //Persist the new resource
+    public function store() {
+    	// die('hello');
+    	// dump(request()->all()); 
+    	$article = new Article();
+
+    	$article->title = request('title');
+    	$article->excerpt = request('excerpt');
+    	$article->body = request('body');
+    	
+    	$article->save();
+    	return redirect("/articles");
+    }
+```

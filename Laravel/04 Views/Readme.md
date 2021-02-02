@@ -208,3 +208,67 @@ It may be the case that some of the functionalities have not been set up in your
 	npm install
 ```
 After insatlling the dependencies you can compile your sass or js files usin the command ***npm run dev***. But if you want to make changes and check them along you can use the following command ***npm run watch***.
+
+
+# Render Dynamic Data
+
+After establishing connection with the database we can access the data and load it in our view.php
+```
+Route::get('/about', function () {
+	// $article = App\Article::all(); 		Query to get all articles
+	// $article = App\Article::latest()->get();	//Query to get articles on the basis of their creation time
+	// $article = App\Article::take(3)->latest()->get();	
+	//Query to get articles 3 articles on the basis of their creation time
+
+	// return $article;
+
+    return view('about', [
+    	'articles' => App\Article::latest()->get()
+    ]);
+});
+```
+After passing the data to the view we can access the data using the blade functionality provided by laravel
+```
+<ul class="style1">
+	@foreach($articles as $article)
+	<li class="first">
+	    <h3>{{ $article -> title}}</h3>
+	    <p><a href="#">{{ $article -> excerpt}}</a></p>
+	</li>
+	@endforeach
+</ul>
+```
+In the example above we can see how the data is rendered from the database.
+
+Further we created view for all the articles by adding the following code to web.php
+```
+Route::get('/articles/{article}', 'ArticlesController@show');
+```
+Now for this we require the article controller which can be created using the command ***php artisan make:controller ArticlesController*** the code for the same is provided below
+```
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Article;
+
+class ArticlesController extends Controller
+{
+    public function show($id) {
+    	$article = Article::find($id);
+    	return view('articles.show', ['article' => $article]);
+    }
+}
+```
+So basically we access the article on the basis of the id passed and to create links to these articles we make changes in the about.blade.php file as well
+```
+<ul class="style1">
+	@foreach($articles as $article)
+	<li class="first">
+	    <h3><a href="/articles/{{$article->id}}">{{ $article -> title}}</a></h3>
+	    <p>{{ $article -> excerpt}}</p>
+	</li>
+	@endforeach
+</ul>
+```

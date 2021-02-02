@@ -113,4 +113,4 @@ And now lets have a look at how we will create our reusable views
 So basically we will extend the layout using ***@extend ('layout')*** and then mark the start and end of section to be inserted using ***@section ('content')*** and ***@endsection***
 
 
-
+#### We can use built in layout pages from [Templated](https://templated.co/)

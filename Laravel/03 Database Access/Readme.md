@@ -140,3 +140,12 @@ class AddTitleToPostsTable extends Migration
 ```
 After we are done you know the command very well just simply ***php artisan migrate*** and you are done.
 If you want to rollback the changes created during the last migrate simply use the command ***php artisan migrate:rollback***
+
+# Generate Multiple Files In A Single Command
+
+We can use a single command to create a model, migration and controller at the same time
+
+```
+	php artisan make:model [name for your model] -mc
+```
+Here the flag m denotes migration whereas flag c denotes controller.

@@ -280,3 +280,115 @@ Setup, database and mail credentials in the .env file and make sure you have use
 ```php artisan word:day```
 
 Command will be executed with the signature that is placed in protected $signature = 'command:name'. You will also see the log message in the terminal.
+
+## Using Closure/Callback Method
+
+Laravel Task Scheduler allows you to execute a callback or a closure periodically using the call method. Let’s add code in the schedule method of app/Console/Kernel.php Here’s the contents of the class with only the schedule method.
+```
+<?php
+ 
+namespace App\Console;
+ 
+use App\User;
+use Illuminate\Console\Scheduling\Schedule;
+use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+ 
+class Kernel extends ConsoleKernel
+{
+    /**
+     * Define the application's command schedule.
+     *
+     * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
+     * @return void
+     */
+    protected function schedule(Schedule $schedule)
+    {
+        $schedule->call(function () {
+            User::where('spam_count', '>', 100)
+                ->get()
+                ->each
+                ->delete();
+        })->hourly();
+    }
+}
+```
+We have passed the closure as the first parameter to the call method. We have set the frequency of the task to hourly, so it will execute every hour. In the call method, we are simply removing users with spam count of more than 100.
+
+## Exec Command
+
+Laravel also allows you to schedule shell commands so that you could issue commands to the operating system and external applications. We use the exec method to execute a shell command.
+
+Here’s a simple example, that allows you to take backup of your code every month.
+```
+<?php
+ 
+namespace App\Console;
+ 
+use Illuminate\Console\Scheduling\Schedule;
+use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+ 
+class Kernel extends ConsoleKernel
+{
+    /**
+     * Define the application's command schedule.
+     *
+     * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
+     * @return void
+     */
+    protected function schedule(Schedule $schedule)
+    {
+        $schedule->exec(
+            'cp -r ' . base_path() . " " . base_path('../backups/' . date('jY'))
+        )->monthly();
+    }
+}
+```
+exec method will run the command you would pass as the first argument. In the code above, it simply copies your laravel project to the backups folder. The backups folder will be followed by the day of the month and a numeric representation of the year. You can also schedule Laravel Jobs in the Task Scheduler the same way we scheduled Artisan commands and closures. Let’s take a look at the Task Scheduler in detail.
+
+## Task Scheduler in Laravel
+
+Task Scheduler in Laravel executes the artisan command, shell, or a callback periodically on the defined time. To do this, we use the schedule method in app/Console/Kernel.php like we discussed earlier.
+```
+protected function schedule(Schedule $schedule)
+{
+    $schedule->command('word:day')
+        ->daily();
+}
+```
+
+$schedule->command('word:day') is where we define which command needs to be executed and ->daily(); defines the frequency of execution. 
+
+There are some more time intervals that we can define. You can replace ->daily(); with another time interval option from the following list. You can find more about Task Scheduling in Laravel Documentation.
+
+- cron(‘* * * * * *’);	Run the task on a custom Cron schedule
+- everyMinute();	Run the task every minute
+- everyFiveMinutes();	Run the task every five minutes
+- everyTenMinutes();	Run the task every ten minutes
+- everyFifteenMinutes();	Run the task every fifteen minutes
+- everyThirtyMinutes();	Run the task every thirty minutes
+- hourly();	Run the task every hour
+- hourlyAt(17);	Run the task every hour at 17 mins past the hour
+- daily();	Run the task every day at midnight
+- dailyAt(’13:00′);	Run the task every day at 13:00
+- twiceDaily(1, 13);	Run the task daily at 1:00 & 13:00
+- weekly();	Run the task every week
+- weeklyOn(1, ‘8:00’);	Run the task every week on Tuesday at 8:00
+- monthly();	Run the task every month
+- monthlyOn(4, ’15:00′);	Run the task every month on the 4th at 15:00
+- quarterly();	Run the task every quarter
+- yearly();	Run the task every year
+- timezone(‘America/New_York’);	Set the timezone
+
+## Starting the Laravel Scheduler
+
+Let’s setup the Cron Jobs to run automatically without initiating manually by running the command. To start the Laravel Scheduler itself, we only need to add one Cron job which executes every minute. Go to your terminal, ssh into your server, cd into your project and run this command.
+
+``crontab -e``
+
+This will open the server Crontab file, paste the code below into the file, save and then exit.
+
+``* * * * * cd /path-to-your-project && php artisan schedule:run >> /dev/null 2>&1``
+
+Do not forget to replace /path/to/artisan with the full path to the Artisan command of your Laravel Application.
+
+One of the most important advantages of Laravel Task Scheduler is that we can focus on creating commands, writing logic and Laravel will take care of the rest. It is manageable by other co-workers because it is now tracked by version control.

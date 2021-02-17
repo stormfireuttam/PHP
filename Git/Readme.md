@@ -81,3 +81,8 @@ All the command to use upload the file and projects on github.
  6) git push origin master
 ```
 In just few minutes. We have successfully upload the project or file on github using command line
+
+
+# Branches in Git
+
+For working on branches in Git. Refer to the following link: [Branches in Git](https://www.atlassian.com/git/tutorials/using-branches#:~:text=The%20git%20branch%20command%20lets,checkout%20and%20git%20merge%20commands.)

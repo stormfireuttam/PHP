@@ -19,4 +19,8 @@ A database instance is a state of operational database with data at any given ti
 
 # Indexing in Database
 
-[Link](https://chartio.com/learn/databases/how-does-indexing-work/#how-does-the-database-know-what-other-fields-in-the-table-to-return)
+[Indexing in Database](https://chartio.com/learn/databases/how-does-indexing-work/#how-does-the-database-know-what-other-fields-in-the-table-to-return)
+
+# Joins in Database
+
+[Joins in DB](https://www.geeksforgeeks.org/sql-join-set-1-inner-left-right-and-full-joins/)

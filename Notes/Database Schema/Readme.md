@@ -16,3 +16,7 @@ A database schema can be divided broadly into two categories −
 It is important that we distinguish these two terms individually. Database schema is the skeleton of database. It is designed when the database doesn't exist at all. Once the database is operational, it is very difficult to make any changes to it. A database schema does not contain any data or information.
 
 A database instance is a state of operational database with data at any given time. It contains a snapshot of the database. Database instances tend to change with time. A DBMS ensures that its every instance (state) is in a valid state, by diligently following all the validations, constraints, and conditions that the database designers have imposed.
+
+# Indexing in Database
+
+[Link](https://chartio.com/learn/databases/how-does-indexing-work/#how-does-the-database-know-what-other-fields-in-the-table-to-return)
